@@ -2,6 +2,24 @@ import java.util.Scanner;
 
 public class GradeCalculator {
 
+    public static double calculateAverage(double[] scores) {
+        double sum = 0;
+        for (double s : scores) sum += s;
+        return sum / scores.length;
+    }
+
+    public static String getLetterGrade(double avg) {
+        if (avg >= 90) return "A";
+        else if (avg >= 80) return "B";
+        else if (avg >= 70) return "C";
+        else if (avg >= 60) return "D";
+        else return "F";
+    }
+
+    public static String getPassFail(double avg) {
+        return avg >= 60 ? "PASS" : "FAIL";
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -17,9 +35,11 @@ public class GradeCalculator {
             scores[i] = Double.parseDouble(scanner.nextLine());
         }
 
+        double avg = calculateAverage(scores);
         System.out.println("\n--- Results for " + name + " ---");
-        System.out.println("Scores entered: " + count + " subjects");
-        System.out.println("(Features coming soon...)");
+        System.out.printf("Average Score : %.2f%n", avg);
+        System.out.println("Letter Grade  : " + getLetterGrade(avg));
+        System.out.println("Status        : " + getPassFail(avg));
 
         scanner.close();
     }
